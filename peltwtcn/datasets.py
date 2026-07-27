@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import io
 import os
+import sys
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
@@ -124,12 +125,49 @@ POLICY_EVENTS: list[tuple[str, int, str]] = [
 # ---------------------------------------------------------------------------
 # caching
 # ---------------------------------------------------------------------------
-def cache_dir(path: str | os.PathLike | None = None) -> Path:
-    """Directory used to cache downloads (``./data`` by default).
+def _user_cache_dir() -> Path:
+    """Per-user cache directory, following each platform's convention."""
+    if sys.platform == "win32":
+        base = os.environ.get("LOCALAPPDATA") or Path.home() / "AppData" / "Local"
+        return Path(base) / "peltwtcn" / "Cache"
+    if sys.platform == "darwin":
+        return Path.home() / "Library" / "Caches" / "peltwtcn"
+    base = os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache"
+    return Path(base) / "peltwtcn"
 
-    Override globally with the ``PELTWTCN_CACHE`` environment variable.
+
+def cache_dir(path: str | os.PathLike | None = None) -> Path:
+    """Directory used to cache downloaded series.
+
+    Resolution order:
+
+    1. ``path``, if given.
+    2. The ``PELTWTCN_CACHE`` environment variable.
+    3. ``./data`` **if it already exists** - so running from a clone of the
+       repository keeps using the CSVs shipped with it, and nothing has to be
+       re-downloaded.
+    4. Otherwise a per-user cache directory, e.g.
+       ``%LOCALAPPDATA%\\peltwtcn\\Cache`` on Windows,
+       ``~/Library/Caches/peltwtcn`` on macOS,
+       ``~/.cache/peltwtcn`` elsewhere.
+
+    Step 3 is deliberately conditional on the directory *already* existing.  An
+    installed copy of the package must not scatter a ``data/`` folder into
+    whatever directory the user happens to be working in.
+
+    Examples
+    --------
+    >>> cache_dir().is_dir()
+    True
     """
-    root = Path(path or os.environ.get("PELTWTCN_CACHE", "data"))
+    if path is not None:
+        root = Path(path)
+    elif os.environ.get("PELTWTCN_CACHE"):
+        root = Path(os.environ["PELTWTCN_CACHE"])
+    elif Path("data").is_dir():
+        root = Path("data")
+    else:
+        root = _user_cache_dir()
     root.mkdir(parents=True, exist_ok=True)
     return root
 

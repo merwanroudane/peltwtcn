@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -117,6 +119,34 @@ def test_cache_dir_is_created(tmp_path, monkeypatch):
     monkeypatch.setenv("PELTWTCN_CACHE", str(tmp_path / "cache"))
     d = cache_dir()
     assert d.exists() and d.is_dir()
+
+
+def test_explicit_path_wins_over_the_environment(tmp_path, monkeypatch):
+    monkeypatch.setenv("PELTWTCN_CACHE", str(tmp_path / "from_env"))
+    assert cache_dir(tmp_path / "explicit").name == "explicit"
+
+
+def test_cache_dir_uses_a_local_data_folder_when_one_exists(tmp_path, monkeypatch):
+    """Running from a clone must reuse the CSVs shipped with the repository."""
+    monkeypatch.delenv("PELTWTCN_CACHE", raising=False)
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "data").mkdir()
+    assert cache_dir() == Path("data")
+
+
+def test_cache_dir_falls_back_to_a_user_directory_when_installed(tmp_path,
+                                                                monkeypatch):
+    """An installed copy must not scatter a data/ folder into the cwd."""
+    monkeypatch.delenv("PELTWTCN_CACHE", raising=False)
+    monkeypatch.chdir(tmp_path)
+    assert not (tmp_path / "data").exists()
+
+    d = cache_dir()
+    assert d.is_absolute()
+    assert d.name.lower() in {"cache", "peltwtcn"}
+    assert "peltwtcn" in str(d).lower()
+    # the crucial part: nothing was created in the working directory
+    assert not (tmp_path / "data").exists()
 
 
 # --------------------------------------------------------------------------

@@ -3,11 +3,29 @@ include LICENSE
 include CITATION.cff
 include requirements.txt
 include pyproject.toml
+include peltwtcn/py.typed
 recursive-include docs *.md
 recursive-include examples *.py
 recursive-include tests *.py
-recursive-include data *.csv
-recursive-include assets *.png
+
+# Deliberately NOT shipped in the distribution:
+#
+#   data/    the EUA price series and its drivers.  These come from
+#            investing.com, Yahoo Finance, the EPU and GPR projects and the
+#            ECB, each under its own terms; redistributing them through PyPI
+#            would be a republication this project has no licence to make.
+#            peltwtcn downloads them on first use into a per-user cache
+#            instead - see peltwtcn.cache_dir.  The git repository keeps them
+#            so the replication is reproducible from a clone.
+#
+#   assets/  the rendered figures, ~8 MB.  They are output, not input, and
+#            examples/run_full_replication.py regenerates them.
+#
+prune data
+prune assets
+prune results
+prune tutorial_output
+
 global-exclude *.py[cod]
 global-exclude __pycache__
 global-exclude *.pdf
