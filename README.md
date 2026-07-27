@@ -5,7 +5,7 @@ price forecasting framework, with the replication audit the paper needs.**
 
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-196%20passing-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-213%20passing-brightgreen.svg)](tests/)
 
 Implements
 
@@ -131,14 +131,23 @@ accident.
 
 ## 5. Results
 
-Protocol B on the real dataset, 25 epochs:
+Protocol B on the real dataset, the paper's own settings (50 epochs, early
+stopping), sorted by RMSE:
 
-| Model | MAE | RMSE | MAPE (%) | R² | Theil U |
-|---|---:|---:|---:|---:|---:|
-| PELT-WT-GRU | 0.848 | 1.236 | 1.161 | 0.9933 | 1.011 |
-| PELT-WT-LSTM (multi) | 0.893 | 1.262 | 1.229 | 0.9930 | 1.032 |
-| PELT-WT-TCN | 1.675 | 2.101 | 2.298 | 0.9806 | 1.718 |
-| *Random walk* | *0.846* | *1.223* | *1.157* | *0.9934* | *1.000* |
+| Model | MAE | RMSE | MAPE (%) | R² | Theil U | Train (s) |
+|---|---:|---:|---:|---:|---:|---:|
+| ***Random walk*** | ***0.8457*** | ***1.2230*** | ***1.1571*** | ***0.9934*** | ***1.0000*** | ***0.0*** |
+| PELT-WT-GRU | 0.8484 | 1.2361 | 1.1611 | 0.9933 | 1.0107 | 79.1 |
+| PELT-WT-LSTM (multi) | 0.8930 | 1.2615 | 1.2292 | 0.9930 | 1.0315 | 64.9 |
+| BP&ICSS-WT-LSTM | 0.9210 | 1.2847 | 1.2583 | 0.9928 | 1.0505 | 76.7 |
+| PELT-WT-LSTM (uni) | 1.0078 | 1.3459 | 1.4313 | 0.9920 | 1.1005 | 271.1 |
+| PELT-WT-TCN | 1.6752 | 2.1012 | 2.2983 | 0.9806 | 1.7180 | 46.8 |
+
+Two results worth stating plainly. **Every one of the five models has Theil's
+U above 1**, so not one of them beats a random walk. And the paper's ranking
+does not survive: it puts PELT-WT-TCN first, whereas here the TCN comes **last**
+by a clear margin. The rest of the order does reproduce — GRU, then multivariate
+LSTM, then BP&ICSS, then univariate LSTM.
 
 As published in the paper (Table 1, p. 22):
 
@@ -269,12 +278,22 @@ pipe = pw.PELTWTPipeline(stationary=True).fit(my_df, price_col="Price")
 
 ## 9. Documentation
 
+Start with the tutorial. It is a single script you can run today, and the guide
+is its narrative twin.
+
 | Document | What it covers |
 |---|---|
-| [`docs/STEP_BY_STEP_GUIDE.md`](docs/STEP_BY_STEP_GUIDE.md) | **How to write the code, stage by stage** — 15 steps, every block runnable |
+| [`examples/tutorial_step_by_step.py`](examples/tutorial_step_by_step.py) | **Start here.** A runnable 13-step tutorial, ~5 minutes, printing what every stage produced |
+| [`docs/TUTORIAL_OUTPUT.md`](docs/TUTORIAL_OUTPUT.md) | The verbatim output of that script, so you can check your own run against it |
+| [`docs/STEP_BY_STEP_GUIDE.md`](docs/STEP_BY_STEP_GUIDE.md) | **How to write the code, stage by stage** — 15 steps, every block runnable, with the reasoning |
 | [`docs/SYNTAX.md`](docs/SYNTAX.md) | Complete API reference: every function, argument and return value |
 | [`docs/REPLICATION_NOTES.md`](docs/REPLICATION_NOTES.md) | What matches the paper, what cannot, and the errata |
-| [`examples/run_full_replication.py`](examples/run_full_replication.py) | All three protocols end to end on real data |
+| [`examples/run_full_replication.py`](examples/run_full_replication.py) | All three protocols end to end at the paper's own 50-epoch settings |
+
+```bash
+python examples/tutorial_step_by_step.py     # learn it   (~5 min)
+python examples/run_full_replication.py      # replicate it (~30 min)
+```
 
 ---
 
@@ -286,7 +305,7 @@ pytest -m "not slow"            # skip the network fits
 pytest -m "not network"         # skip the live downloads
 ```
 
-196 fast tests. Highlights of what is actually verified, rather than merely
+200 fast tests, 13 more that fit networks. Highlights of what is actually verified, rather than merely
 asserted:
 
 - the TCN's dilated convolution is **strictly causal** — perturbing `x_t` for

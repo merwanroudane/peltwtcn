@@ -3,6 +3,18 @@
 How to write the code yourself, one stage at a time. Every block runs on its
 own — paste it into a script or a notebook and it works.
 
+If you would rather run a finished script first and read afterwards, the same
+material is packaged as a single runnable tutorial:
+
+```bash
+python examples/tutorial_step_by_step.py
+```
+
+It takes about five minutes, prints what every stage produced, and its verbatim
+output is saved in [`TUTORIAL_OUTPUT.md`](TUTORIAL_OUTPUT.md) so you can check
+your own run against it. This document is the narrative version, with the
+reasoning behind each choice.
+
 If you only want the finished result, skip to [step 10](#step-10-all-of-it-in-one-call).
 
 **Contents**

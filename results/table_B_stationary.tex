@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\caption{Protocol B: the same models, applied to the first difference}
+\label{tab:B_stationary}
+\begin{tabular}{lrrrrrr}
+\toprule
+ & MAE & RMSE & MAPE (%) & R2 & Theil U & Train (s) \\
+Model &  &  &  &  &  &  \\
+\midrule
+Random walk & 0.845700 & 1.223000 & 1.157100 & 0.993400 & 1.000000 & 0.000000 \\
+PELT-WT-GRU & 0.848400 & 1.236100 & 1.161100 & 0.993300 & 1.010700 & 79.143500 \\
+PELT-WT-LSTM (multi) & 0.893000 & 1.261500 & 1.229200 & 0.993000 & 1.031500 & 64.889000 \\
+BP&ICSS-WT-LSTM & 0.921000 & 1.284700 & 1.258300 & 0.992800 & 1.050500 & 76.677700 \\
+PELT-WT-LSTM (uni) & 1.007800 & 1.345900 & 1.431300 & 0.992000 & 1.100500 & 271.109900 \\
+PELT-WT-TCN & 1.675200 & 2.101200 & 2.298300 & 0.980600 & 1.718000 & 46.839000 \\
+\bottomrule
+\end{tabular}
+\end{table}
