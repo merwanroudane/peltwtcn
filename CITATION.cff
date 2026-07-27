@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the original paper."
+title: "peltwtcn: Hybrid deep-learning carbon price forecasting with PELT structural-break detection and wavelet denoising"
+version: 1.0.0
+type: software
+authors:
+  - family-names: "Roudane"
+    given-names: "Merwan"
+    email: "merwanroudane920@gmail.com"
+    orcid: ""
+repository-code: "https://github.com/merwanroudane/peltwtcn"
+license: MIT
+keywords:
+  - carbon price forecasting
+  - EU ETS
+  - structural breaks
+  - PELT
+  - wavelet denoising
+  - temporal convolutional network
+references:
+  - type: article
+    title: "A Hybrid Deep Learning based Carbon Price Forecasting Framework with Structural Breakpoints Detection and Signal Denoising"
+    authors:
+      - family-names: "Ren"
+        given-names: "Runsheng"
+      - family-names: "Li"
+        given-names: "Jing"
+      - family-names: "Li"
+        given-names: "Yanxiu"
+      - family-names: "Huang"
+        given-names: "Shixun"
+      - family-names: "Shen"
+        given-names: "Jun"
+      - family-names: "Li"
+        given-names: "Wanqing"
+      - family-names: "Le"
+        given-names: "John"
+      - family-names: "Wang"
+        given-names: "Sheng"
+    year: 2025
+    journal: "arXiv preprint"
+    number: "2511.04988"
+    url: "https://arxiv.org/abs/2511.04988"

@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+.venv/
+venv/
+env/
+.python-version
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+
+# Editors / local tooling
+.vscode/
+.idea/
+.claude/
+*.swp
+.DS_Store
+
+# Transient run log of examples/run_full_replication.py
+results_run.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Keras / TensorFlow
+*.keras
+*.h5
+logs/
+
+# peltwtcn cache of downloaded series
+.peltwtcn_cache/
+
+# Large source PDF of the paper (not redistributable)
+*.pdf
+!docs/*.pdf
+!assets/*.pdf
