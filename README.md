@@ -3,9 +3,14 @@
 **A faithful Python implementation of the PELT → wavelet → deep-learning carbon
 price forecasting framework, with the replication audit the paper needs.**
 
+[![PyPI](https://img.shields.io/pypi/v/peltwtcn.svg)](https://pypi.org/project/peltwtcn/)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-213%20passing-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-216%20passing-brightgreen.svg)](tests/)
+
+```bash
+pip install peltwtcn
+```
 
 Implements
 
@@ -65,17 +70,52 @@ The paper's pipeline, end to end, in one call — plus the diagnostics it omits.
 
 ## 2. Installation
 
+From PyPI:
+
+```bash
+pip install peltwtcn
+```
+
+That gives you the break detectors, the wavelet layer, the metrics, the tables
+and the figures. The three neural networks need TensorFlow, which is an extra
+because it is a large dependency and half the package does not need it:
+
+```bash
+pip install "peltwtcn[deep]"      # + TensorFlow
+pip install "peltwtcn[all]"       # + TensorFlow, yfinance, openpyxl, seaborn
+```
+
+Extras: `[deep]` TensorFlow · `[data]` yfinance + openpyxl · `[plots]` seaborn ·
+`[test]` pytest. Without TensorFlow the model builders raise a clear
+`ImportError` and everything else works.
+
+Requires Python ≥ 3.9.
+
+### To reproduce the paper
+
+Install from a clone instead. The replication needs the bundled price CSVs and
+the example scripts, which are not shipped in the PyPI distribution:
+
 ```bash
 git clone https://github.com/merwanroudane/peltwtcn.git
 cd peltwtcn
 pip install -e ".[all]"
+python examples/tutorial_step_by_step.py     # learn it     (~5 min)
+python examples/run_full_replication.py      # replicate it  (~30 min)
 ```
 
-Extras: `[deep]` TensorFlow · `[data]` yfinance + openpyxl · `[plots]` seaborn ·
-`[test]` pytest. Without TensorFlow everything except the three networks still
-works.
+### Where the data goes
 
-Requires Python ≥ 3.9.
+`load_paper_dataset()` downloads the EUA price and its drivers on first use and
+caches them. The cache is `./data` when that directory already exists — so a
+clone reuses the CSVs shipped with it — and otherwise a per-user directory
+(`%LOCALAPPDATA%\peltwtcn\Cache` on Windows, `~/Library/Caches/peltwtcn` on
+macOS, `~/.cache/peltwtcn` elsewhere). Override with `PELTWTCN_CACHE` or
+`pw.cache_dir(path)`.
+
+The price series are **not** redistributed through PyPI: they come from
+investing.com, Yahoo Finance, the EPU and GPR projects and the ECB, each under
+its own terms.
 
 ---
 
@@ -348,7 +388,7 @@ pytest -m "not slow"            # skip the network fits
 pytest -m "not network"         # skip the live downloads
 ```
 
-200 fast tests, 13 more that fit networks. Highlights of what is actually verified, rather than merely
+203 fast tests, 13 more that fit networks. Highlights of what is actually verified, rather than merely
 asserted:
 
 - the TCN's dilated convolution is **strictly causal** — perturbing `x_t` for

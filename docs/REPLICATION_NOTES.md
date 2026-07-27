@@ -288,7 +288,12 @@ recomputable. `tests/test_tables.py` pins the 70.55 % and 6.60 % figures.
 
 ## 8. Reproducing these numbers
 
+The replication must be run from a clone. `pip install peltwtcn` gives you the
+library but not the bundled price CSVs or the example scripts.
+
 ```bash
+git clone https://github.com/merwanroudane/peltwtcn.git
+cd peltwtcn
 pip install -e ".[all]"
 python examples/run_full_replication.py
 ```

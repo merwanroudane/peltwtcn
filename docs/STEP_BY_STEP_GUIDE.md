@@ -39,6 +39,16 @@ If you only want the finished result, skip to [step 10](#step-10-all-of-it-in-on
 
 ## Step 1: Install
 
+For the library alone:
+
+```bash
+pip install "peltwtcn[all]"
+```
+
+To follow this guide with the real dataset and run the example scripts, install
+from a clone instead — the price CSVs and the examples are not shipped in the
+PyPI distribution:
+
 ```bash
 git clone https://github.com/merwanroudane/peltwtcn.git
 cd peltwtcn
