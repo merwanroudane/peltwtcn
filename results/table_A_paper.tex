@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\caption{Protocol A: the level model, exactly as the paper specifies it}
+\label{tab:A_paper}
+\begin{tabular}{lrrrrrr}
+\toprule
+ & MAE & RMSE & MAPE (%) & R2 & Theil U & Train (s) \\
+Model &  &  &  &  &  &  \\
+\midrule
+Random walk & 0.845700 & 1.223000 & 1.157100 & 0.993400 & 1.000000 & 0.000000 \\
+PELT-WT-TCN & 36.119600 & 37.271100 & 49.536800 & -5.101500 & 30.472900 & 37.100000 \\
+PELT-WT-LSTM (multi) & 35.074000 & 38.250700 & 45.434300 & -5.426400 & 31.276700 & 41.400000 \\
+PELT-WT-LSTM (uni) & 41.815700 & 43.304600 & 56.311200 & -7.236800 & 35.408000 & 178.800000 \\
+BP&ICSS-WT-LSTM & 46.137300 & 48.867700 & 60.770200 & -9.489000 & 39.957900 & 38.300000 \\
+PELT-WT-GRU & 52.541200 & 55.177500 & 69.818400 & -12.372500 & 45.116600 & 55.400000 \\
+\bottomrule
+\end{tabular}
+\end{table}

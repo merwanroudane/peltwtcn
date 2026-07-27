@@ -161,13 +161,56 @@ As published in the paper (Table 1, p. 22):
 
 Available in code as `pw.PAPER_TABLE1`.
 
-Under protocol A — the paper's specification applied literally — RMSE is **34 to
-55** with a **negative R²**, and the forecast collapses to a flat band around
-EUR 20 against a truth of EUR 33–98. That is not a bug in this implementation;
-[§6](#6-what-the-replication-found) explains exactly why, and the reasoning is
-reproducible.
+RMSE under all three protocols, so the effect of each change is visible:
 
-Full numbers land in `results/` after running the replication script.
+| Model | Paper | A level | B stationary | C causal |
+|---|---:|---:|---:|---:|
+| BP&ICSS-WT-LSTM | 5.3878 | 48.8677 | 1.2847 | 1.7253 |
+| PELT-WT-LSTM (uni) | 2.7488 | 43.3046 | 1.3459 | 1.7221 |
+| PELT-WT-LSTM (multi) | 2.2967 | 38.2507 | 1.2615 | **1.7215** |
+| PELT-WT-GRU | 1.6987 | 55.1775 | 1.2361 | 1.7269 |
+| PELT-WT-TCN | 1.5866 | 37.2711 | 2.1012 | 2.2677 |
+| *Random walk* | — | *1.2230* | *1.2230* | *1.7217* |
+
+Under **protocol A**, the paper's specification applied literally, every model
+lands between RMSE 37 and 55 with R² between −5.1 and −12.4, and the forecast
+collapses to a flat band around EUR 20 against a truth of EUR 33–98. That is not
+a bug in this implementation — [§6](#6-what-the-replication-found) explains why,
+and the reasoning is reproducible.
+
+Under **protocol C**, with every look-ahead removed, all four recurrent models
+land within 0.3 % of the random walk and of each other. Theil's U is 1.000 to
+three decimals. The formal tests then settle it:
+
+- Diebold–Mariano, best model vs the random walk: **DM = −0.122, p = 0.9027**.
+  Not significant. No pairwise difference among the four recurrent models is
+  significant either.
+- Model Confidence Set at α = 0.10: **five of six models survive, including the
+  random walk.** The only specification rejected is the paper's own preferred
+  one, PELT-WT-TCN — rejected for being significantly *worse* (p = 0.0000).
+
+Once the leak is removed there is no evidence that any of the paper's five
+architectures forecasts the EUA price better than assuming tomorrow's price
+equals today's.
+
+Full numbers, and the 34 figures, land in `results/` and `assets/`.
+
+### A few of the figures
+
+Structural breaks in the EUA price, matched to the policy chronology
+(the paper's Figure 7):
+
+![Detected structural breaks](assets/fig07_breakpoints.png)
+
+Every model's forecast against the realised price on the test window
+(Figure 14):
+
+![All forecasts](assets/fig15_all_forecasts.png)
+
+Pairwise Diebold–Mariano p-values — the test the paper does not run. Pale cells
+are pairs that cannot be distinguished:
+
+![Diebold-Mariano p-values](assets/fig20_dm_pvalues.png)
 
 ---
 

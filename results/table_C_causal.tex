@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\caption{Protocol C: stationary and leakage-free}
+\label{tab:C_causal}
+\begin{tabular}{lrrrrrr}
+\toprule
+ & MAE & RMSE & MAPE (%) & R2 & Theil U & Train (s) \\
+Model &  &  &  &  &  &  \\
+\midrule
+PELT-WT-LSTM (multi) & 1.052800 & 1.721500 & 1.447500 & 0.987000 & 0.999700 & 93.647900 \\
+Random walk & 1.041600 & 1.721700 & 1.430000 & 0.987000 & 1.000000 & 0.000000 \\
+PELT-WT-LSTM (uni) & 1.043300 & 1.722100 & 1.433800 & 0.987000 & 1.000100 & 148.894400 \\
+BP&ICSS-WT-LSTM & 1.061100 & 1.725300 & 1.458400 & 0.987000 & 1.002000 & 181.006500 \\
+PELT-WT-GRU & 1.064900 & 1.726900 & 1.463700 & 0.986900 & 1.002900 & 50.711600 \\
+PELT-WT-TCN & 1.624600 & 2.267700 & 2.264100 & 0.977500 & 1.317100 & 187.862300 \\
+\bottomrule
+\end{tabular}
+\end{table}
