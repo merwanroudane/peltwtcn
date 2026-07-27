@@ -37,7 +37,7 @@ https://github.com/merwanroudane
 
 from __future__ import annotations
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Dr Merwan Roudane"
 __email__ = "merwanroudane920@gmail.com"
 __license__ = "MIT"

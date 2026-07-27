@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite both the software and the original paper."
 title: "peltwtcn: Hybrid deep-learning carbon price forecasting with PELT structural-break detection and wavelet denoising"
-version: 1.0.0
+version: 1.0.1
 type: software
 authors:
   - family-names: "Roudane"

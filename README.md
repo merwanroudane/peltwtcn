@@ -12,6 +12,16 @@ price forecasting framework, with the replication audit the paper needs.**
 pip install peltwtcn
 ```
 
+📘 **New here? Start with the
+[step-by-step guide](https://github.com/merwanroudane/peltwtcn/blob/main/docs/STEP_BY_STEP_GUIDE.md)** —
+it teaches you to write the whole analysis yourself in 15 stages, every block
+runnable. Or run the
+[13-step tutorial](https://github.com/merwanroudane/peltwtcn/blob/main/examples/tutorial_step_by_step.py)
+(~5 min) and read
+[its output](https://github.com/merwanroudane/peltwtcn/blob/main/docs/TUTORIAL_OUTPUT.md)
+alongside. Full API in the
+[syntax reference](https://github.com/merwanroudane/peltwtcn/blob/main/docs/SYNTAX.md).
+
 Implements
 
 > Ren, R., Li, J., Li, Y., Huang, S., Shen, J., Li, W., Le, J. and Wang, S.
@@ -240,24 +250,24 @@ Full numbers, and the 34 figures, land in `results/` and `assets/`.
 Structural breaks in the EUA price, matched to the policy chronology
 (the paper's Figure 7):
 
-![Detected structural breaks](assets/fig07_breakpoints.png)
+![Detected structural breaks](https://raw.githubusercontent.com/merwanroudane/peltwtcn/main/assets/fig07_breakpoints.png)
 
 Every model's forecast against the realised price on the test window
 (Figure 14):
 
-![All forecasts](assets/fig15_all_forecasts.png)
+![All forecasts](https://raw.githubusercontent.com/merwanroudane/peltwtcn/main/assets/fig15_all_forecasts.png)
 
 Pairwise Diebold–Mariano p-values — the test the paper does not run. Pale cells
 are pairs that cannot be distinguished:
 
-![Diebold-Mariano p-values](assets/fig20_dm_pvalues.png)
+![Diebold-Mariano p-values](https://raw.githubusercontent.com/merwanroudane/peltwtcn/main/assets/fig20_dm_pvalues.png)
 
 ---
 
 ## 6. What the replication found
 
 Four findings, all reproducible. Details and derivations in
-[`docs/REPLICATION_NOTES.md`](docs/REPLICATION_NOTES.md).
+[`docs/REPLICATION_NOTES.md`](https://github.com/merwanroudane/peltwtcn/blob/main/docs/REPLICATION_NOTES.md).
 
 ### The models cannot extrapolate past the training range
 
@@ -366,12 +376,12 @@ is its narrative twin.
 
 | Document | What it covers |
 |---|---|
-| [`examples/tutorial_step_by_step.py`](examples/tutorial_step_by_step.py) | **Start here.** A runnable 13-step tutorial, ~5 minutes, printing what every stage produced |
-| [`docs/TUTORIAL_OUTPUT.md`](docs/TUTORIAL_OUTPUT.md) | The verbatim output of that script, so you can check your own run against it |
-| [`docs/STEP_BY_STEP_GUIDE.md`](docs/STEP_BY_STEP_GUIDE.md) | **How to write the code, stage by stage** — 15 steps, every block runnable, with the reasoning |
-| [`docs/SYNTAX.md`](docs/SYNTAX.md) | Complete API reference: every function, argument and return value |
-| [`docs/REPLICATION_NOTES.md`](docs/REPLICATION_NOTES.md) | What matches the paper, what cannot, and the errata |
-| [`examples/run_full_replication.py`](examples/run_full_replication.py) | All three protocols end to end at the paper's own 50-epoch settings |
+| [`examples/tutorial_step_by_step.py`](https://github.com/merwanroudane/peltwtcn/blob/main/examples/tutorial_step_by_step.py) | **Start here.** A runnable 13-step tutorial, ~5 minutes, printing what every stage produced |
+| [`docs/TUTORIAL_OUTPUT.md`](https://github.com/merwanroudane/peltwtcn/blob/main/docs/TUTORIAL_OUTPUT.md) | The verbatim output of that script, so you can check your own run against it |
+| [`docs/STEP_BY_STEP_GUIDE.md`](https://github.com/merwanroudane/peltwtcn/blob/main/docs/STEP_BY_STEP_GUIDE.md) | **How to write the code, stage by stage** — 15 steps, every block runnable, with the reasoning |
+| [`docs/SYNTAX.md`](https://github.com/merwanroudane/peltwtcn/blob/main/docs/SYNTAX.md) | Complete API reference: every function, argument and return value |
+| [`docs/REPLICATION_NOTES.md`](https://github.com/merwanroudane/peltwtcn/blob/main/docs/REPLICATION_NOTES.md) | What matches the paper, what cannot, and the errata |
+| [`examples/run_full_replication.py`](https://github.com/merwanroudane/peltwtcn/blob/main/examples/run_full_replication.py) | All three protocols end to end at the paper's own 50-epoch settings |
 
 ```bash
 python examples/tutorial_step_by_step.py     # learn it   (~5 min)
@@ -461,7 +471,7 @@ Other packages: `QuantileOnQuantile`, `mqqr`, `qqkrls`, `mqqcause` (CRAN).
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](https://github.com/merwanroudane/peltwtcn/blob/main/LICENSE).
 
 The implementation is original work. The methodology is due to Ren et al.
 (2025); please cite them. Redistribution of the underlying price series is

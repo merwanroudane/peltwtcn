@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "peltwtcn"
-version = "1.0.0"
+version = "1.0.1"
 description = "Hybrid deep-learning carbon price forecasting with PELT structural-break detection and wavelet denoising"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -68,9 +68,14 @@ all = [
 
 [project.urls]
 Homepage = "https://github.com/merwanroudane/peltwtcn"
+"Step-by-step guide" = "https://github.com/merwanroudane/peltwtcn/blob/main/docs/STEP_BY_STEP_GUIDE.md"
+"Tutorial (runnable)" = "https://github.com/merwanroudane/peltwtcn/blob/main/examples/tutorial_step_by_step.py"
+"Syntax reference" = "https://github.com/merwanroudane/peltwtcn/blob/main/docs/SYNTAX.md"
+"Replication notes" = "https://github.com/merwanroudane/peltwtcn/blob/main/docs/REPLICATION_NOTES.md"
+Documentation = "https://github.com/merwanroudane/peltwtcn/tree/main/docs"
 Repository = "https://github.com/merwanroudane/peltwtcn"
 Issues = "https://github.com/merwanroudane/peltwtcn/issues"
-Documentation = "https://github.com/merwanroudane/peltwtcn/tree/main/docs"
+Changelog = "https://github.com/merwanroudane/peltwtcn/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 packages = ["peltwtcn"]

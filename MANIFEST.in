@@ -1,6 +1,7 @@
 include README.md
 include LICENSE
 include CITATION.cff
+include CHANGELOG.md
 include requirements.txt
 include pyproject.toml
 include peltwtcn/py.typed
