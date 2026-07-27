@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(TF_CPP_MIN_LOG_LEVEL=3 python -m pytest tests -m \"not slow and not network\" -q)"
-    ]
-  }
-}
